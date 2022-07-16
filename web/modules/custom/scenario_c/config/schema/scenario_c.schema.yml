@@ -1,0 +1,8 @@
+# Schema for the configuration files of the Scenario C module.
+scenario_c.settings:
+  type: config_object
+  label: 'Scenario C settings'
+  mapping:
+    bearer_token:
+      type: string
+      label: 'Bearer Token'

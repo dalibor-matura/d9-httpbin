@@ -1,0 +1,7 @@
+scenario_c.settings_form:
+  path: '/admin/config/system/scenario-c'
+  defaults:
+    _title: 'Scenario C settings'
+    _form: 'Drupal\scenario_c\Form\SettingsForm'
+  requirements:
+    _permission: 'administer scenario_c configuration'

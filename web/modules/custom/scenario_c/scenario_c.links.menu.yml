@@ -1,0 +1,6 @@
+scenario_c.settings_form:
+  title: 'Scenario C'
+  description: 'Configure Scenario C.'
+  parent: system.admin_config_system
+  route_name: scenario_c.settings_form
+  weight: 10

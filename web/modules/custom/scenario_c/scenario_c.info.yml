@@ -1,0 +1,5 @@
+name: Scenario C
+type: module
+description: Implementation of a task assignment of Scenario C.
+package: Custom
+core_version_requirement: ^9 || ^10
