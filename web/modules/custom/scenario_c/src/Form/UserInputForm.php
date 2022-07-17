@@ -4,7 +4,7 @@ namespace Drupal\scenario_c\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Component\Serialization\Json;
+use Drupal\Core\Render\Markup;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\scenario_c\Form\SettingsForm;
 use GuzzleHttp\Exception\GuzzleException;
@@ -75,12 +75,11 @@ class UserInputForm extends FormBase {
     $email = $form_state->getValue(self::EMAIL) ?? '';
 
     // Prepare the JSON payload.
-    $payload = [
+    $json_payload = [
       self::FIRST_NAME => trim($first_name),
       self::LAST_NAME => trim($last_name),
       self::EMAIL => trim($email),
     ];
-    $payload = JSON::encode($payload);
 
     $http_client = \Drupal::httpClient();
 
@@ -94,19 +93,19 @@ class UserInputForm extends FormBase {
             'Authorization' => 'Bearer ' . $bearer_token,
             'cache-control' => 'no-cache',
           ],
-          RequestOptions::BODY => $payload,
+          RequestOptions::JSON => $json_payload,
         ],
       );
 
       // Keep in mind this is a StreamInterface not a string. But it can be
       // easily type-casted to string by "(string) $response_payload".
       $response_payload = $response->getBody();
+      $message = '<pre>' . (string) $response_payload . '</pre>';
+      $markup = Markup::create($message);
 
       // TODO: Not intended for production.
       $this->messenger()
-        ->addStatus($this->t('Response: @response', [
-          '@response' => (string) $response_payload,
-        ]));
+        ->addStatus($markup);
 
       return TRUE;
     }
@@ -116,7 +115,7 @@ class UserInputForm extends FormBase {
 
       // TODO: Not intended for production.
       $this->messenger()
-        ->addStatus($this->t('Guzzle Exception: @exception', [
+        ->addError($this->t('Guzzle Exception: @exception', [
           '@exception' => (string) $message,
         ]));
 
