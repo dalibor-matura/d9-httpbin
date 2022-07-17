@@ -6,3 +6,6 @@ scenario_c.settings:
     bearer_token:
       type: string
       label: 'Bearer Token'
+    api_endpoint:
+      type: string
+      label: 'API Endpoint'
