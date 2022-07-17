@@ -1,2 +1,2 @@
 bearer_token: 'AbCdEf123456'
-api_endpoint: 'http://api'
+api_endpoint: 'https://httpbin.org/post'
