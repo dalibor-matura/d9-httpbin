@@ -1,0 +1,7 @@
+services:
+  logger.channel.scenario_c:
+    parent: logger.channel_base
+    arguments: ['scenario_c']
+  scenario_c.rest_api:
+    class: Drupal\scenario_c\ScenarioC\RestApi
+    arguments: ['@http_client', '@config.manager', '@messenger', '@logger.channel.scenario_c']
