@@ -5,3 +5,10 @@ scenario_c.settings_form:
     _form: 'Drupal\scenario_c\Form\SettingsForm'
   requirements:
     _permission: 'administer scenario_c configuration'
+scenario_c.user_input_form:
+  path: '/user-input-form'
+  defaults:
+    _title: 'User Input Form'
+    _form: 'Drupal\scenario_c\Form\UserInputForm'
+  requirements:
+    _access: 'TRUE'
